@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - University Management System</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/common.js" defer></script>
+    <script src="/login.js" defer></script>
+</head>
+<body class="login-page">
+    <h1>University Management System</h1>
+    <h2>Login</h2>
+    <p id="message" role="status" aria-live="polite"></p>
+    <form id="login-form">
+        <p><label for="username">Username</label>
+            <input id="username" name="username" autocomplete="username" required></p>
+        <p><label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required></p>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
