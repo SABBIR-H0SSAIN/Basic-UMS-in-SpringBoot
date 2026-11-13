@@ -20,8 +20,8 @@ async function apiRequest(url, method = "GET", body = null) {
     const response = await fetch(url, options);
     const data = response.status === 204 ? null : await response.json();
     if (!response.ok) {
-        if (response.status === 401 && window.location.pathname !== "/login.html") {
-            window.location.replace("/login.html");
+        if (response.status === 401 && window.location.pathname !== "/login") {
+            window.location.replace("/login");
         }
         throw new Error(data.message || "The request failed. Please try again.");
     }
@@ -36,15 +36,15 @@ function showMessage(message) {
 async function loadCurrentUser() {
     const user = await apiRequest("/api/auth/me");
     const navigation = document.getElementById("navigation");
-    addNavigationLink(navigation, "Dashboard", "/dashboard.html");
+    addNavigationLink(navigation, "Dashboard", "/dashboard");
     if (user.role === "ADMIN") {
-        addNavigationLink(navigation, "Admins", "/admins.html");
+        addNavigationLink(navigation, "Admins", "/admins");
     }
     if (user.role === "ADMIN" || user.role === "TEACHER") {
-        addNavigationLink(navigation, "Teachers", "/teachers.html");
+        addNavigationLink(navigation, "Teachers", "/teachers");
     }
     if (user.role === "ADMIN" || user.role === "STUDENT") {
-        addNavigationLink(navigation, "Students", "/students.html");
+        addNavigationLink(navigation, "Students", "/students");
     }
 
     const logoutButton = document.createElement("button");
@@ -53,7 +53,7 @@ async function loadCurrentUser() {
     logoutButton.addEventListener("click", async function () {
         try {
             await apiRequest("/api/auth/logout", "POST");
-            window.location.replace("/login.html");
+            window.location.replace("/login");
         } catch (error) {
             showMessage(error.message);
         }

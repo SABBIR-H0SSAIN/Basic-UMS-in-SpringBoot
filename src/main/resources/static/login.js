@@ -9,7 +9,7 @@ document.getElementById("login-form").addEventListener("submit", async function 
             password: this.elements.password.value
         });
         this.reset();
-        window.location.replace("/dashboard.html");
+        window.location.replace("/dashboard");
     } catch (error) {
         showMessage(error.message);
     } finally {
