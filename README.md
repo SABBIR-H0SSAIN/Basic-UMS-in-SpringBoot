@@ -21,6 +21,31 @@ docker compose up -d postgres
 
 Open [the local login page](http://localhost:8080/login).
 
+## Run tests
+
+Run the unit tests with JDK 21:
+
+```sh
+./mvnw -Dtest=AccountServiceTest test
+```
+
+Start a separate PostgreSQL container:
+
+```sh
+docker run --rm -d --name ums-test-db -p 127.0.0.1:5433:5432 \
+  -e POSTGRES_DB=ums_test -e POSTGRES_USER=ums_test \
+  -e POSTGRES_PASSWORD=ums_test_password postgres:17-alpine
+```
+
+Once PostgreSQL is ready, run the full suite and stop the container:
+
+```sh
+./mvnw verify
+docker stop ums-test-db
+```
+
+GitHub Actions runs the full suite on pushes and pull requests.
+
 ## API
 
 CRUD endpoints are available under `/api/admins`, `/api/teachers`, and `/api/students`. To try them, import the [Postman collection](postman/UMS.postman_collection.json) and run it in order. Set `baseUrl` to `http://localhost:8081` when using the full Docker stack.
