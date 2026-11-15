@@ -29,19 +29,10 @@ Run the unit tests with JDK 21:
 ./mvnw -Dtest=AccountServiceTest test
 ```
 
-Start a separate PostgreSQL container:
-
-```sh
-docker run --rm -d --name ums-test-db -p 127.0.0.1:5433:5432 \
-  -e POSTGRES_DB=ums_test -e POSTGRES_USER=ums_test \
-  -e POSTGRES_PASSWORD=ums_test_password postgres:17-alpine
-```
-
-Once PostgreSQL is ready, run the full suite and stop the container:
+With Docker running, run the full suite. Testcontainers starts and stops a dedicated PostgreSQL container automatically.
 
 ```sh
 ./mvnw verify
-docker stop ums-test-db
 ```
 
 GitHub Actions runs the full suite on pushes and pull requests.
